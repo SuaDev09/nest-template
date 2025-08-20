@@ -1,66 +1,78 @@
+# Nest Template
 
-## How to run Swagger UI
-### In your terminal, run `npm run start` and go to `localhost:8734/api-docs`
+This repository provides a starter template for building applications with [NestJS](https://nestjs.com/). Below you'll find an explanation of each directory ("carpet"), and instructions on how to run and build the project.
 
-### Example of .env.dev
-```bash
-# .env.dev
-DB_SERVER=dev-server
-DB_DATABASE=dev-db
-DB_DOMAIN=dev-domain
-DB_USER_NAME=dev-user
-DB_PASSWORD=password
+---
+
+## Directory Structure
+
+- **src/**  
+  This is the main source code directory for the NestJS application. All modules, controllers, services, and application logic are placed here.
+
+- **test/**  
+  Contains testing files and specifications. Use this folder to write unit and integration tests for your application.
+
+- **.env**  
+  Environment variables for configuring your application (database credentials, ports, etc.).
+
+- **Configuration Files**  
+  - `.eslintrc.js`, `.prettierrc`: Linting and formatting rules.
+  - `nest-cli.json`: Nest CLI configuration.
+  - `package.json`: Project metadata, dependencies, and scripts.
+  - `tsconfig*.json`: TypeScript configuration files for main code and tests.
+
+---
+
+## Running the Project
+
+Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
+
+1. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+
+2. **Run the application in development mode:**
+   ```sh
+   npm run start:dev
+   ```
+   This starts the server with hot-reloading.
+
+3. **Run the application in production mode:**
+   ```sh
+   npm run build
+   npm run start:prod
+   ```
+
+---
+
+## Building the Project
+
+To build the application for production:
+
+```sh
+npm run build
 ```
 
+The compiled JavaScript files will be generated in the `dist/` directory.
 
-## Installation
+---
 
-```bash
-$ npm install
+## Testing
+
+Run the tests using:
+
+```sh
+npm run test
 ```
 
-## Running the app
-This application runs in the port 3152
-```bash
-# development
-$ npm run start
+Other useful test scripts can be found in `package.json` (e.g., `test:watch`, `test:cov` for coverage).
 
-# watch mode
-$ npm run start:dev
+---
 
-# production mode
-$ npm run start:prod
-```
+## Notes
 
-If the port already in use when application is running, add this in your terminal
+- Edit the `.env` file to set your environment variables.
+- Follow the code style guidelines enforced by ESLint and Prettier.
 
-```bash
-$ netstat -ano | findstr :3152
-```
-
-A table like this will be displayed:
-
-```bash 
-TCP    0.0.0.0:3152           0.0.0.0:0              LISTENING       44408
-TCP    [::]:3152              [::]:0                 LISTENING       44408
-```
-
-Then, kill the process with this command:
-
-```bash
-$ taskill /F /PID 44408
-```
-Please replace 44408  with your process number 
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
+For more details, refer to the official [NestJS documentation](https://docs.nestjs.com/).
