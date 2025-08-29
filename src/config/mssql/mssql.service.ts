@@ -1,18 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 // import * as SQL from 'mssql';
 import { ConnectionPool } from 'mssql';
+
 // Loggers
 // import GeneralLogger from 'src/common/loggers/general-logger/general-logger';
-import { CONFIG_DB } from './config.constant';
+import generateDbConfigHelper from './helper/generate-db-config.helper';
 import GeneralLogger from 'src/common/loggers/general-logger/general-logger';
 
 @Injectable()
 export class MSSqlService {
   private pools: { [key: string]: Promise<ConnectionPool> } = {};
-
+  private dbConfigs = [];
+  constructor(private readonly _configService: ConfigService) {
+    this.dbConfigs = generateDbConfigHelper([
+      _configService.get('projectRequestDB'),
+    ]);
+  }
   async createPool() {
-    for (const config of CONFIG_DB) {
+    for (const config of this.dbConfigs) {
       if (this.pools[config.poolName]) {
         GeneralLogger('DB', `Pool ${config.poolName} already exists.`, 'INFO');
         continue;
